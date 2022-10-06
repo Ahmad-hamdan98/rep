@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con{
+            display: flex;
+            justify-content: space-around;
+        }
+        .nav{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 30px;
+        }
+        .up{
+            margin-top: 20px;
+        }
+        table{
+            width: 600px;
+           
+            text-align: center;
+            margin-left: 20%;
+        }
+        #name{
+            margin-left: 20%;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="con">
+    
+        <div>
+        <h1>Arbotrary</h1>
+        <p>This site to track rendomly planeted trees</p>
+        </div>
+        <div class="supcon">
+        <div class="up">
+            
+            
+            Welcome, {{user.first_name}}
+        </div>
+        <div class="nav">
+            
+        <form action="/dashbord" method="post" >
+            {% csrf_token %}
+        <button type="submit" >Dashbord</button>
+    
+        </form>
+    
+        <form action="/logout">
+            {% csrf_token %}
+             <button type="submit">Logout</button> 
+        </form>
+    
+        </div>
+        </div></div>
+
+        
+        <h1 id="name">Manege My tree</h1>
+        <table border="1" >
+            <tr>
+                <td>Specise</td>
+                <td>date blanted</td>
+                
+                <td>Actions</td>
+            </tr>
+            
+            
+            {% for tree in useruploder %}
+            <tr>
+                <td>{{tree.specise}}</td>
+                <td>{{tree.created_at}}</td>
+                
+                <td><a href="/delete/{{tree.id}}">delete</a> <a href="/edit/{{tree.id}}">Edit</a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+</body>
+</html>

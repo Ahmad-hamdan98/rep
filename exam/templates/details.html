@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con{
+            display: flex;
+            justify-content: space-around;
+        }
+        .nav{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 30px;
+        }
+        .up{
+            margin-top: 20px;
+        }
+        .black{
+            width: 150px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+        .dis{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+    
+        <div>
+        <h1>Arbotrary</h1>
+        <p>This site to track rendomly planeted trees</p>
+        </div>
+        <div class="supcon">
+        <div class="up">
+            <a href="/mytree">My Trees</a>
+            
+            Welcome, {{user.first_name}}
+        </div>
+        <div class="nav">
+            
+        <form action="/dashbord" method="post" >
+            {% csrf_token %}
+        <button type="submit" >Dashbord</button>
+    
+        </form>
+    
+        <form action="/logout">
+            {% csrf_token %}
+             <button type="submit">Logout</button> 
+        </form>
+    
+        </div>
+        </div></div>
+        
+        <div class="dis">
+        <div>
+        <h1>{{tree.specise}} planted by {{user.first_name}} {{user.last_name}}</h1>
+        Where : {{tree.location}} <br>
+        Whene : {{tree.updated_at}} <br>
+        Reason : {{tree.reason}}
+        </div>
+        <dif class="bones">
+            <h3>Visited be : </h3>
+        <div class="black" >
+                
+                {% for user in vistor %}
+                <p>{{user.first_name}} {{user.last_name}}</p>
+                {% endfor %}
+        </div><br>
+
+        {% if user not in vistor %}
+        <a href="/addvistor/{{tree.id}}">Did you visit this tree</a>
+        {% endif %}
+        </dif></div>
+</body>
+</html>
